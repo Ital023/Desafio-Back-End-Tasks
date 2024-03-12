@@ -1,23 +1,19 @@
 package br.com.italomiranda.DesafioBackEndTasks.domain.tasks;
 
 import br.com.italomiranda.DesafioBackEndTasks.domain.tasks.DTO.TaskDTO;
-import br.com.italomiranda.DesafioBackEndTasks.domain.tasks.UseCases.AlterTaskUseCase;
-import br.com.italomiranda.DesafioBackEndTasks.domain.tasks.UseCases.CreateTaskUseCase;
-import br.com.italomiranda.DesafioBackEndTasks.domain.tasks.UseCases.DeleteTaskUseCase;
-import br.com.italomiranda.DesafioBackEndTasks.domain.tasks.UseCases.ViewAllTasksUseCase;
+import br.com.italomiranda.DesafioBackEndTasks.domain.tasks.UseCases.*;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/tasks")
 public class TaskController {
-
-    @Autowired
-    private TasksRepository tasksRepository;
     @Autowired
     private CreateTaskUseCase create;
     @Autowired
@@ -26,6 +22,8 @@ public class TaskController {
     private DeleteTaskUseCase delete;
     @Autowired
     private AlterTaskUseCase alter;
+    @Autowired
+    private CompleteTaskUseCase complete;
 
     @GetMapping
     public ResponseEntity allTasks(){
@@ -51,5 +49,11 @@ public class TaskController {
         return ResponseEntity.noContent().build();
     }
 
+    @PatchMapping("/{id}/complete")
+    @Transactional
+    public ResponseEntity completeTask(@PathVariable UUID id){
+        complete.CompleteTask(id);
+        return ResponseEntity.ok("Task completada!");
+    }
 
 }
