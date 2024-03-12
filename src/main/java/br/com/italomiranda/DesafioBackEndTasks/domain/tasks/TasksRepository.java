@@ -2,5 +2,7 @@ package br.com.italomiranda.DesafioBackEndTasks.domain.tasks;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface TasksRepository extends JpaRepository {
+import java.util.UUID;
+
+public interface TasksRepository extends JpaRepository <Task,UUID>{
 }
