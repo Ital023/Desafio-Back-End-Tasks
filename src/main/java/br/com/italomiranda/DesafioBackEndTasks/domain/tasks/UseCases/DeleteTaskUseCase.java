@@ -2,6 +2,7 @@ package br.com.italomiranda.DesafioBackEndTasks.domain.tasks.UseCases;
 
 import br.com.italomiranda.DesafioBackEndTasks.domain.tasks.Task;
 import br.com.italomiranda.DesafioBackEndTasks.domain.tasks.TasksRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,8 @@ public class DeleteTaskUseCase {
 
         if(task.isPresent()){
             tasksRepository.deleteById(id);
+        }else{
+            throw new EntityNotFoundException();
         }
     }
 }

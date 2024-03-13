@@ -17,7 +17,7 @@ public class CreateTaskUseCase {
             tasksRepository.save(task);
             return task;
         }else{
-            throw new EntityNotFoundException();
+            throw new NullPointerException();
         }
     }
 

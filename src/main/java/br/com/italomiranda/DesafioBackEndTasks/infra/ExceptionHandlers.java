@@ -12,4 +12,9 @@ public class ExceptionHandlers {
         return ResponseEntity.badRequest().body("Dado não encontrado");
     }
 
+    @ExceptionHandler(NullPointerException.class)
+    public ResponseEntity threat400(){
+        return ResponseEntity.badRequest().body("Falta informações no body");
+    }
+
 }
