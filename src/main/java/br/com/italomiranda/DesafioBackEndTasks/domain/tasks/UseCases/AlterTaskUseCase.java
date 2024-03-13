@@ -3,6 +3,7 @@ package br.com.italomiranda.DesafioBackEndTasks.domain.tasks.UseCases;
 import br.com.italomiranda.DesafioBackEndTasks.domain.tasks.DTO.TaskDTO;
 import br.com.italomiranda.DesafioBackEndTasks.domain.tasks.Task;
 import br.com.italomiranda.DesafioBackEndTasks.domain.tasks.TasksRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,10 +33,11 @@ public class AlterTaskUseCase {
                 taskOriginal.setDescription(taskDTO.description());
                 taskOriginal.setUpdated_at(dateNow);
             }else{
-
                 taskOriginal.setTitle(taskDTO.title());
                 taskOriginal.setUpdated_at(dateNow);
             }
+        }else{
+            throw new EntityNotFoundException();
         }
 
     }
